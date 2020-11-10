@@ -1,0 +1,60 @@
+version: "3.3"
+services:
+  back:
+    volumes:
+      - "./log:/app/log"
+    build:
+      context: ../
+      dockerfile: deploy/dev.dockerfile
+    ports:
+      - 5000:5000
+    depends_on: 
+      - pgb
+    environment:
+      TZ: Europe/Moscow
+      PGHOST: pgb
+      PGDATABASE: bigdata
+      PGUSER: selezard
+      PGPASSWORD: huipyhui
+      PGPORT: 6432
+      
+  pgb:
+    image: pgbouncer/pgbouncer
+    logging:
+      driver: none #disabled spam logs
+    depends_on:
+      - db
+    environment:
+      TZ: UTC-3:00
+      DATABASES_USER: selezard
+      DATABASES_PASSWORD: huipyhui
+      DATABASES_HOST: db
+      DATABASES_DBNAME: bigdata
+      DATABASES_PORT: 5432
+    ports: 
+      - 6432:6432
+  db:
+    image: "postgres"
+    ports: 
+      - 5432:5432
+    environment:
+      TZ: Europe/Moscow
+      POSTGRES_DB: bigdata
+      POSTGRES_USER: selezard
+      POSTGRES_PASSWORD: huipyhui
+  nginx:
+    image: nginx:alpine
+    logging:
+      driver: none #disabled spam logs
+    depends_on: 
+      - back
+    ports:
+      - 80:80
+    volumes: 
+      - ./nginx:/etc/nginx/conf.d
+    environment:
+      TZ: Europe/Moscow
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
