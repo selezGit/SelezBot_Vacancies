@@ -55,6 +55,10 @@ services:
     environment:
       TZ: Europe/Moscow
   grafana:
-    image: grafana/grafana
+    container_name: grafana
+    image: grafana/grafana:latest
+    user: "0"
     ports:
       - 3000:3000
+    volumes:
+      - /srv/docker/grafana/data:/var/lib/grafana
