@@ -34,7 +34,7 @@ services:
     ports: 
       - 6432:6432
   db:
-    image: "postgres"
+    image: postgres
     ports: 
       - 5432:5432
     environment:
@@ -42,6 +42,8 @@ services:
       POSTGRES_DB: bigdata
       POSTGRES_USER: selezard
       POSTGRES_PASSWORD: huipyhui
+    volumes:
+      - ./data:/var/lib/postgresql
   nginx:
     image: nginx:alpine
     logging:
