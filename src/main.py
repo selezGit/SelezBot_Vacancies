@@ -2,7 +2,7 @@
 
 from flask import Flask, request, Response, render_template
 from psycopg2 import connect
-from models import Session, Vacancy, valid_responce
+from vacancies.models import Session, Vacancy, valid_responce
 from json import loads
 
 app = Flask(__name__)

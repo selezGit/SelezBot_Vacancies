@@ -5,6 +5,7 @@ from sqlalchemy import (
     Column,
     String,
     Integer,
+    Float,
     DateTime,
     ForeignKey,
     create_engine,
@@ -55,6 +56,13 @@ class Vacancy(Base, TemplateModel):
     name = Column(String())
     publication_date = Column(String())
 
+class Vacancy_responce(Base, TemplateModel):
+    __tablename__ = "vacancy_responce"
+    vacid = Column(Integer())
+    state = Column(Integer())
+    timestamp = Column(DateTime())
+    score = Column(Integer())
+
 def create_tables():
     #Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
@@ -68,3 +76,7 @@ def valid_responce(data):
     else:
         ready_data = data._dictify()
     return dumps(ready_data)
+
+
+if __name__ == "__main__":
+    pass

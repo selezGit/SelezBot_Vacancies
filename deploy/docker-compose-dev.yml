@@ -16,8 +16,7 @@ services:
       PGDATABASE: bigdata
       PGUSER: selezard
       PGPASSWORD: huipyhui
-      PGPORT: 6432
-      
+      PGPORT: 6432      
   pgb:
     image: pgbouncer/pgbouncer
     logging:
@@ -39,11 +38,12 @@ services:
       - 5432:5432
     environment:
       TZ: Europe/Moscow
+      PGDATA: /pg-data
       POSTGRES_DB: bigdata
       POSTGRES_USER: selezard
       POSTGRES_PASSWORD: huipyhui
     volumes:
-      - ./data:/var/lib/postgresql
+      - ./pg-data:/pg-data
   nginx:
     image: nginx:alpine
     logging:
@@ -56,11 +56,10 @@ services:
       - ./nginx:/etc/nginx/conf.d
     environment:
       TZ: Europe/Moscow
-  grafana:
-    container_name: grafana
-    image: grafana/grafana:latest
-    user: "0"
-    ports:
-      - 3000:3000
+  redis:
+    container_name: redis
+    image: redis:alpine
     volumes:
-      - /srv/docker/grafana/data:/var/lib/grafana
+      - ./redisdata:/data
+    ports:
+      - "6379:6379"

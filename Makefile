@@ -1,11 +1,11 @@
 up:	
-	docker-compose -p vacancy -f deploy/docker-compose-dev.yml up --build -d
+	sudo docker-compose -p vacancy -f deploy/docker-compose-dev.yml up --build -d
 
 up_log:
-	docker-compose -p vacancy -f deploy/docker-compose-dev.yml up --build
+	sudo docker-compose -p vacancy -f deploy/docker-compose-dev.yml up --build
 
 down:
-	docker-compose -p vacancy -f deploy/docker-compose-dev.yml down
+	sudo docker-compose -p vacancy -f deploy/docker-compose-dev.yml down
 
 logs:
-	docker-compose -p vacancy -f deploy/docker-compose-dev.yml logs -f --tail 30
+	sudo docker-compose -p vacancy -f deploy/docker-compose-dev.yml logs -f --tail 30
