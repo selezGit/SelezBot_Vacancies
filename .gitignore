@@ -1,6 +1,7 @@
-.log
-.pyc
-.env
-.json
+*.log
+*.pyc
+*.env
+*.rdb
 deploy/pg-data
 deploy/redisdata
+src/data.json
