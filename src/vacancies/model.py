@@ -86,9 +86,11 @@ def check_weight_skills(vacancy: list) -> float:
                     if k in my_skills and k in s[i][j]:
                         total += s[i][j][k][2]
             else:
+                new_list = [x for x in s[i].keys() if x != "з/п не указана"]
+                near_key = min(new_list, key=lambda value: abs(int(j)-int(value)))
                 for k in vacancy['skills']:
-                    if k in my_skills:
-                        total += 1/len(vacancy['skills'])
+                    if k in my_skills and k in s[i][near_key]:
+                        total += s[i][near_key][k][2]
     '''усредняем случай когда требуемый опыт работы,
     указан диапазоном например от 1 до 3 лет, 
     так как скрипт в этом случае сделает 2 прохода'''

@@ -1,4 +1,5 @@
 # pylint: disable=no-member
+# pylint: disable=import-error
 
 '''Вспомогательный файл для кластеризации навыков,
     за основу были взяты данные из 3500 вакансий
@@ -7,7 +8,7 @@
 import json
 import re
 from collections import OrderedDict
-from Db_model import Session, Vacancy_data
+from vacancies.Db_model import Session, Vacancy_data
 
 newdict = {                
             "0": {},
@@ -19,7 +20,6 @@ newdict = {
 def splitter() -> dict:
     sess = Session()
     data = sess.query(Vacancy_data.experience, Vacancy_data.salary, Vacancy_data.skils).all()
-    print(data)
     for dataframe in data: 
         salary = conversion_currency(dataframe[1])
         skils = [i.strip() for i in (["None"] if not dataframe[2] else dataframe[2].lower().split(","))]

@@ -1,13 +1,9 @@
 version: "3.3"
 services:
   back:
-    volumes:
-      - "./log:/app/log"
     build:
       context: ../
       dockerfile: deploy/dev.dockerfile
-    ports:
-      - 5000:5000
     depends_on: 
       - pgb
     env_file:
@@ -16,6 +12,13 @@ services:
       PGPORT: 6432
       TZ: Europe/Moscow
       PGHOST: pgb
+    ports: 
+      - 5000:5000
+    logging:
+      driver: "gelf"
+      options: 
+        gelf-address: "tcp://0.0.0.0:12201"
+        tag: "first-logs"
   pgb:
     image: pgbouncer/pgbouncer
     logging:
@@ -41,18 +44,6 @@ services:
       PGDATA: /pg-data
     volumes:
       - ./pg-data:/pg-data
-  nginx:
-    image: nginx:alpine
-    logging:
-      driver: none #disabled spam logs
-    depends_on: 
-      - back
-    ports:
-      - 80:80
-    volumes: 
-      - ./nginx:/etc/nginx/conf.d
-    environment:
-      TZ: Europe/Moscow
   redis:
     container_name: redis
     image: redis:alpine

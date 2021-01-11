@@ -30,6 +30,20 @@
             "command": "make logs",
             "group": "build",
             "problemMatcher": []
+        },
+        {
+            "label": "graylog_start",
+            "type": "shell",
+            "command": "make graylog_start",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "graylog_stop",
+            "type": "shell",
+            "command": "make graylog_stop",
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

@@ -49,8 +49,6 @@ class TemplateModel:
                 _dict[elem] = self.__dict__.get(elem)
         return _dict
 
-
-
 class Vacancy(Base, TemplateModel):
     __tablename__ = "vacancy"
     name = Column(String())
@@ -72,7 +70,6 @@ class Vacancy_data(Base, TemplateModel):
     skils =  Column(String())
 
 def create_tables():
-    #Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
     
 def valid_responce(data):
