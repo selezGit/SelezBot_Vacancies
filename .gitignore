@@ -1,11 +1,12 @@
 *.log
 *.pyc
 *.env
-*.rdb
 *.pyc
+*.rdb
+
+deploy/.redisdata
 deploy/pg-data
 deploy/.graylog
 deploy/.mongo
 deploy/.elasticsearch
-deploy/redisdata
 **/__pycache__

@@ -48,6 +48,6 @@ services:
     container_name: redis
     image: redis:alpine
     volumes:
-      - ./redisdata:/data
+      - ./.redisdata:/data
     ports:
       - 6379:6379
