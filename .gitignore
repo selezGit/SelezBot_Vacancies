@@ -1,9 +1,11 @@
+#files
 *.log
 *.pyc
 *.env
 *.pyc
 *.rdb
 
+#paths
 deploy/.redisdata
 deploy/pg-data
 deploy/.graylog
